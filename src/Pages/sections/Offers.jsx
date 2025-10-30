@@ -1,8 +1,8 @@
 // src/components/Offers.jsx
 import React, { useEffect, useState } from "react";
-import ProductCarousel from "./ProductCarousel";
+import ProductCarousel from "../components/ProductCarousel";
 import SectionBanner from "./SectionBanner";
-import useFetch from "../customhooks/useFetch";
+import useFetch from "../../customhooks/useFetch";
 
 export default function Offers({ onOpenCart = () => {} }) {
      const [offers, setOffers] = useFetch({
@@ -32,6 +32,7 @@ export default function Offers({ onOpenCart = () => {} }) {
                     title={"عروض خاصة"}
                     products={offers}
                     id={"c2"}
+                    cardClass="border-2 border-amber-400"
                     onOpenCart={onOpenCart}
                />
           </section>

@@ -188,7 +188,6 @@ export function Nav() {
         </IconButton>
       </div>
 
-      {/* ✅ Replaced MobileNav with Collapse */}
       <Collapse open={openNav}>
         <div className="container mx-auto">
           {navList}

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import HotSelling from "../components/HotSelling";
-import Offers from "../components/Offers";
-import Products from "../components/Products";
-import Footer from "../components/Footer";
-import CartModal from "../components/CartModal";
-import Cart from "../components/Cart";
+import Hero from "./sections/Hero";
+import HotSelling from "./sections/HotSelling";
+import Offers from "./sections/Offers";
+import Products from "./sections/Products";
+import Footer from "../Pages/components/Footer"
+import CartModal from "./components/CartModal";
+import Cart from "./components/Cart";
+import Navbar from "./components/Navbar";
 export default function Home() {
      const [isCartOpen, setCartOpen] = useState(false);
 
@@ -16,13 +16,13 @@ export default function Home() {
                <main className="flex-1">
                     <Hero
                          title={"اكتشف احدث صحيات الموضة مع"}
-                         strong={"رمز ليالي"}
+                         strong={"فيونكا ستور🎀"}
                          subtitle={
                               "تسوق الآن تشكيلتنا من الملابس والعبايات. توصيل سريع وضمان جودة"
                          }
-                         imgURL={
-                              "https://i.postimg.cc/y6wjc9V6/forwebsitebanner2-1.png"
-                         }
+                         img1={"https://i.postimg.cc/8kWGJv78/0E1A0426jpg.jpg"}
+                         img2={"https://i.postimg.cc/2jvYbWVg/0E1A0037.jpg"}
+                         img3={"https://i.postimg.cc/1Xp1Lkkp/0E1A0415.jpg"}
                     />
                     <div className="">
                          <HotSelling onOpenCart={() => setCartOpen(true)} />

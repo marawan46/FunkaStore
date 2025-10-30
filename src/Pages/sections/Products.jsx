@@ -1,15 +1,15 @@
 // src/components/Products.jsx
 import React, { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
-import useFetch from "../customhooks/useFetch";
+import ProductCard from "../components/ProductCard";
+import useFetch from "../../customhooks/useFetch";
 
 export default function Products({ onOpenCart = () => {} }) {
      const [products, setProducts] = useState([]);
-     const [data, error] = useFetch({tableName:"Products"});
+     const [data, error] = useFetch({ tableName: "Products" });
 
      useEffect(() => {
           //console.log(data);
-          setProducts(data)
+          setProducts(data);
      }, [data]);
 
      return (
