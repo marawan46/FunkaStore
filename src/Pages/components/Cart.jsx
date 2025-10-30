@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCartState, useCart } from "../Pages/context/cartContext";
+import { useCartState, useCart } from "../context/cartContext";
 import { ShoppingBasket } from "lucide-react";
 const Cart = ({ onOpenCart = () => {} }) => {
      const state = useCartState();
