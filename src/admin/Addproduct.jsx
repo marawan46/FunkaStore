@@ -19,7 +19,7 @@ const Addproduct = () => {
     description:"",
     offer_price: "",
     imageURL: "",
-    category: "عبايات",
+    category: "",
     colors: [],
     sizes: [],
     isOffer: false,
@@ -27,7 +27,17 @@ const Addproduct = () => {
     available: true,
   });
      const [loading, setloading] = useState(false)
-  
+
+        const [sizesList, sizesError] = useFetch({ tableName: "Sizes" });
+        const [colorsList, colorsError] = useFetch({ tableName: "Colors" });
+        const [categories, categoriesError] = useFetch({ tableName: "categories" });
+
+  useEffect(()=>{
+        console.log(categories);
+        setProduct({ ...product, category: categories[0]?.id })
+
+  },[categories])
+
 const handleCreate = async () => {
   try {
     setloading(true)
@@ -85,7 +95,7 @@ const handleCreate = async () => {
       MySwal.fire({
             title: <strong>نجح!</strong>,
             html: <i>تم اضافة المنتج </i>,
-            icon: 'succes'
+            icon: 'success'
                }).then((res)=>{
                     if(res.isConfirmed)
                          navigate(-1)
@@ -105,9 +115,7 @@ const handleCreate = async () => {
             
   }
 };
-  const [sizesList, sizesError] = useFetch({ tableName: "Sizes" });
-  const [colorsList, colorsError] = useFetch({ tableName: "Colors" });
-  const [categories, categoriesError] = useFetch({ tableName: "categories" });
+
 
 
 
@@ -199,7 +207,7 @@ const handleCreate = async () => {
                           }
                         />
                         <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-semibold">
-                          ر.س
+                          ج.م
                         </span>
                       </div>
                     </div>
@@ -219,7 +227,7 @@ const handleCreate = async () => {
                           }
                         />
                         <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-semibold">
-                          ر.س
+                          ج.م
                         </span>
                       </div>
                     </div>
@@ -238,8 +246,8 @@ const handleCreate = async () => {
                           setProduct({ ...product, category: e.target.value })
                         }
                       >
-                        {categories.map(({name,id}) => (
-                          <option key={id} value={id}>
+                        {categories.map(({name,id},idx) => (
+                         <option key={id} value={id}>
                             {name}
                           </option>
                         ))}

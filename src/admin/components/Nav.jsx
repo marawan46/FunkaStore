@@ -87,7 +87,8 @@ export function Nav() {
       </li>
       </Link>
       {/* إعدادات */}
-      <li className="flex items-center gap-x-2 p-1 font-medium text-blue-gray-300">
+      <Link to="settings">
+      <li className="flex items-center gap-x-2 p-1 font-medium text-blue-gray-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -128,11 +129,12 @@ export function Nav() {
         </svg>
         <span>إعدادات</span>
       </li>
+      </Link>
     </ul>
   );
 
   return (
-    <Navbar className="mx-auto fixed z-50 max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
+    <Navbar className="mx-auto fixed z-50 max-w-screen-xl self-center px-4 py-2 lg:px-8 lg:py-4">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
         <Link to="/">
           <Typography
@@ -140,7 +142,7 @@ export function Nav() {
             title="HOME"
             className="mr-4 cursor-pointer py-1.5 font-extrabold font-title"
           >
-            رمز ليالي
+            فيونكا ستور
           </Typography>
         </Link>
 

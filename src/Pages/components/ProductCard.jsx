@@ -3,6 +3,7 @@ import React from "react";
 import { useCart } from "../context/cartContext"
 import SoldOut from "./SoldOut";
 import SpecialOfferBadge from "./SpecialOfferBadge"
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ product, onOpenCart = () => {} }) {
      const cart = useCart();
@@ -17,9 +18,10 @@ export default function ProductCard({ product, onOpenCart = () => {} }) {
      };
 
      return (
+<Link to={`product/${product.id}`}>
 <div
   dir="rtl"
-  className="bg-white relative rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition h-[480px] md:h-[500px]"
+  className="bg-white border-2 border-transparent hover:!border-amber-200 hover:cursor-pointer relative rounded-lg shadow-sm overflow-hidden flex flex-col hover:shadow-md transition h-[480px] md:h-[500px]"
 >
   {!product.available && <SoldOut />}
   {product.isOffer && <SpecialOfferBadge />}
@@ -83,7 +85,7 @@ export default function ProductCard({ product, onOpenCart = () => {} }) {
     </div>
   </div>
 </div>
-
+</Link>
 
 
 

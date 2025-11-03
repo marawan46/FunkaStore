@@ -5,6 +5,8 @@ import Productform from "./admin/Productform";
 import Notfound from "./Pages/Notfound";
 import Addproduct from "./admin/Addproduct";
 import Adminlayout from "./admin/pages/Adminlayout";
+import SettingsPage from "./admin/pages/Settings";
+import ProductDetails from "./Pages/ProductDetails";
 export default function App() {
 
      return (
@@ -12,12 +14,14 @@ export default function App() {
       <Route>
         <Route path="*" element={<Notfound/>}/>
         <Route path="/" element={<Home/>}/>
+        <Route path="product/:id" element={<ProductDetails/>}/>
 </Route>
 
       <Route path="/admin-hksGuhI9uj8Hf3agfL/*" element={<Adminlayout/>}>
         <Route index element={<Adminpage/>} />
         <Route path="productform/:id" element={<Productform/>}/>
         <Route path="addproduct" element={<Addproduct/>}/>
+        <Route path="settings" element={<SettingsPage/>}/>
       </Route>
 </Routes>
 
