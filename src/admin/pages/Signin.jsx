@@ -4,21 +4,33 @@ import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export function Signin() {
   const navigaite = useNavigate()
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
   const [credentials,setCred] = useState({email:"",password:""})
+  const MySwal = withReactContent(Swal);
 
-
+     function errormessage(message) {
+          MySwal.fire({
+               title: `ERROR ${message.code}`,
+               text: `${message.message}`,
+               icon: "error",
+               showCancelButton: false,
+               confirmButtonColor: "#25b800",
+               confirmButtonText: "OK",
+          });
+     }
     const handleAuth = async ()=>{//get session
 
         const { data, error } = await supabase.auth.signInWithPassword({
         email: credentials.email,
         password: credentials.password,
         })
-        console.log(data,error)
+        if(error) errormessage(error)
         
             
     }
