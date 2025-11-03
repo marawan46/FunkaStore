@@ -31,7 +31,7 @@ const Productform = () => {
           description:"",
           offer_price: "",
           imageURL: "",
-          category: "عبايات",
+          category: "",
           colors: [],
           sizes: [],
           isOffer: false,
@@ -133,7 +133,7 @@ const Productform = () => {
      const [productData, productError] = useFetch({
           tableName: "Products",
           selectStatment: `
-      id, name, imgURL, price, category, offer_price,
+      id, name,description, imgURL, price, category:categories(id), offer_price,
       isOffer, available, isHot,
       product_size(Sizes:size(size, id)),
       products_colors(Colors:color_id(color, ColorName,id))
@@ -141,17 +141,18 @@ const Productform = () => {
           filter: "id",
           condition: id,
      });
-     console.log(sizesList, colorsList, categories, productData);
+
 
      useEffect(() => {
           if (productData?.[0]) {
                const p = productData[0];
                setProduct({
                     name: p.name || "",
+                    description:p.description || "",
                     price: p.price || "",
                     offer_price: p.offer_price || "",
                     imageURL: p.imgURL || "",
-                    category: p.category || "",
+                    category: p.category?.id || "",
                     colors:
                          p.products_colors?.map((pc) => pc.Colors.id) || [],
                     sizes: p.product_size?.map((ps) => ps.Sizes.id) || [],
@@ -160,8 +161,10 @@ const Productform = () => {
                     available: p.available ?? true,
                });
           }
+          //console.log("from useEffct....");
+          
      }, [productData]);
-console.log();
+//console.log(productData);
 
      const toggleColor = (hex) => {
           setProduct((prev) => ({
@@ -191,13 +194,13 @@ console.log();
                <div className="max-w-5xl mx-auto">
                     {/* Header */}
                     <div className="mb-8">
-                         <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                         <h1 className="text-4xl font-bold font-title text-gray-900 mb-2 flex items-center gap-3">
                               <div className="w-12 h-12 bg-green-700 rounded-xl flex items-center justify-center">
                                    <Pencil className="w-6 h-6 text-white" />
                               </div>
                               تعديل تفاصيل منتج{" "}
                          </h1>
-                         <p className="text-gray-600 text-lg">تعديل منتج</p>
+                         <p className="text-gray-600 text-lg font-subtitle">تعديل منتج</p>
                     </div>
 
                     <div className="bg-white border border-gray-300 rounded-2xl shadow-xl overflow-hidden">
@@ -224,7 +227,7 @@ console.log();
                                                   </label>
                                                   <input
                                                        type="text"
-                                                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-gray-900 transition-colors"
+                                                       className="w-full px-4 py-3 border-2 font-title border-gray-200 rounded-xl focus:outline-none focus:border-gray-900 transition-colors"
                                                        placeholder="أدخل اسم المنتج"
                                                        value={product.name}
                                                        onChange={(e) =>
@@ -249,6 +252,7 @@ console.log();
                                                        value={
                                                             product.description
                                                        }
+                                                       className="font-subtitle"
                                                        onChange={(e) =>
                                                             setProduct({
                                                                  ...product,
@@ -290,7 +294,7 @@ console.log();
                                                                  }
                                                             />
                                                             <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-semibold">
-                                                                 ر.س
+                                                                 ج.م
                                                             </span>
                                                        </div>
                                                   </div>
@@ -322,7 +326,7 @@ console.log();
                                                                  }
                                                             />
                                                             <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-semibold">
-                                                                 ر.س
+                                                                 ج.م
                                                             </span>
                                                        </div>
                                                   </div>
@@ -337,39 +341,22 @@ console.log();
                                                        </span>
                                                   </label>
                                                   <div className="relative">
-                                                       <select
-                                                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-gray-900 transition-colors appearance-none bg-white cursor-pointer"
-                                                            value={productData[0]?.category || undefined}
-                                                            onChange={(e) =>
-                                                                 setProduct({
-                                                                      ...product,
-                                                                      category:
-                                                                           e
-                                                                                .target
-                                                                                .value,
-                                                                 })
-                                                            }
-                                                       >
-                                                            {categories.map(
-                                                                 ({
-                                                                      name,
-                                                                      id,
-                                                                 }) => (
-                                                                      <option
-                                                                           key={
-                                                                                id
-                                                                           }
-                                                                           value={
-                                                                                id
-                                                                           }
-                                                                      >
-                                                                           {
-                                                                                name
-                                                                           }
-                                                                      </option>
-                                                                 )
-                                                            )}
-                                                       </select>
+                                                                 <select
+                                                                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-gray-900 transition-colors appearance-none bg-white cursor-pointer"
+                                                                      value={product.category}
+                                                                      onChange={(e) =>
+                                                                           setProduct({
+                                                                                ...product,
+                                                                                category: e.target.value,
+                                                                           })
+                                                                      }
+                                                                 >
+                                                                      {categories.map(({ name, id }) => (
+                                                                           <option key={id} value={id}>
+                                                                                {name}
+                                                                           </option>
+                                                                      ))}
+                                                                 </select>
                                                        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                                             <svg
                                                                  className="w-5 h-5 text-gray-500"
