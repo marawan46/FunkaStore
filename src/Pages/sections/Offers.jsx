@@ -25,7 +25,7 @@ export default function Offers({ onOpenCart = () => {} }) {
                     title={"🔥افضل العروض"}
                     subtitle={"اشتري بافضل الاسعار"}
                     imgURL={
-                         "https://i.postimg.cc/Ss0VK4m7/forwebsitebanner2.png"
+                         "banner/forwebsitebanner12.png"
                     }
                />
                <ProductCarousel
