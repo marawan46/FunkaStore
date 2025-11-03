@@ -50,15 +50,15 @@ export default function ProductCard({ product, onOpenCart = () => {} }) {
       {product.isOffer ? (
         <div className="offer flex gap-2 mt-1">
           <div className="text-gray-700 font-bold whitespace-nowrap font-subtitle">
-            {product.offer_price} ر.س
+            {product.offer_price} ج.م
           </div>
           <div className="text-gray-500 line-through font-subtitle text-sm">
-            {product.price} ر.س
+            {product.price} ج.م
           </div>
         </div>
       ) : (
         <div className="text-gray-700 font-bold font-subtitle mt-1">
-          {product.price} ر.س
+          {product.price} ج.م
         </div>
       )}
 
