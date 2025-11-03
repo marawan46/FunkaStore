@@ -142,7 +142,7 @@ export function Nav() {
             title="HOME"
             className="mr-4 cursor-pointer py-1.5 font-extrabold font-title"
           >
-            فيونكا ستور
+            فيونكه ستور
           </Typography>
         </Link>
 
