@@ -28,7 +28,7 @@ export default function HotSelling({ onOpenCart = () => {} }) {
                     }
                     subtitle={"اكثر منتجاتنا مبيعا الان"}
                     imgURL={
-                         "https://i.postimg.cc/Ss0VK4m7/forwebsitebanner2.png"
+                         "banner/forwebsitebanner1.png"
                     }
                />
                <ProductCarousel

@@ -1,3 +1,6 @@
+import { Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
+
 export default function Hero({title,subtitle,img1,img2,img3,strong}) {
   return (
 <section className="w-full relative pt-28 min-h-screen flex items-center justify-center bg-gradient-to-r from-violet-200 to-pink-200 px-8 pb-8" dir="rtl">
@@ -16,9 +19,10 @@ export default function Hero({title,subtitle,img1,img2,img3,strong}) {
               {subtitle}
           </p>
 
-          <button className="bg-gray-900 text-white px-6 py-3 rounded-md w-fit hover:bg-gray-800 transition-all">
+          <Typography as="a" href="#hot" className="bg-gray-900 text-white px-6 py-3 rounded-md w-fit hover:bg-gray-800 transition-all">
             تصفحي المنتجات
-          </button>
+          </Typography>
+          
         </div>
 
         {/* Right side: image placeholders */}

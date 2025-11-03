@@ -40,8 +40,8 @@ export function Signin() {
         <Typography variant="h3" color="blue-gray" className="mb-2 font-title font-extrabold">
           تسجيل دخول 
         </Typography>
-        <Typography className="mb-16 text-gray-600 font-normal text-[18px]">
-تسجيل الدخول لادارة صفحة رمز ليالي
+        <Typography className="mb-16 text-gray-600 font-normal font-title text-[18px]">
+تسجيل الدخول لادارة صفحة فيونكا ستور
         </Typography>
         <form action="#" className="mx-auto max-w-[24rem] text-left">
           <div className="mb-6">

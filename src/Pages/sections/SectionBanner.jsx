@@ -9,8 +9,8 @@ const SectionBanner = ({ title, subtitle, icon, imgURL }) => {
 
   <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-1 md:gap-10 items-center bg-white/70 dark:bg-gray-900/60 backdrop-blur-xl border border-gray-200 rounded-3xl shadow-lg px-10">
     <div className="space-y-5 text-center md:text-right p-5">
-      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">{icon}{title}</h1>
-      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{subtitle}</p>
+      <h1 className="text-4xl md:text-5xl font-bold font-title text-gray-900 dark:text-white">{icon}{title}</h1>
+      <p className="text-gray-600 dark:text-gray-400 font-subtitle leading-relaxed">{subtitle}</p>
     </div>
 
     <div className="flex justify-center md:justify-end">
