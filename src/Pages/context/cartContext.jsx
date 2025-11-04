@@ -40,7 +40,7 @@ export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
 
   const actions = {
-    addItem: (product) => dispatch({ type: "ADD_ITEM", product }),
+    addItem: (product,color,size) => dispatch({ type: "ADD_ITEM", product,color,size }),
     removeItem: (id) => dispatch({ type: "REMOVE_ITEM", id }),
     updateQty: (id, qty) => dispatch({ type: "UPDATE_QTY", id, qty }),
     clear: () => dispatch({ type: "CLEAR" }),

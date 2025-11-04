@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import React from "react";
 import CartModal from "./components/CartModal";
 import { useCart } from "./context/cartContext";
-
+import { Loading } from "../admin/components/Loading";
 
 const ProductDetail = () => {
      const { id } = useParams();
@@ -26,7 +26,7 @@ const ProductDetail = () => {
           available: true,
      });
 
-     const [productData, productError] = useFetch({
+     const [productData, productError, loading] = useFetch({
           tableName: "Products",
           selectStatment: `
       id, name,description, imgURL, price, category:categories(id), offer_price,
@@ -67,16 +67,19 @@ const ProductDetail = () => {
      const cart = useCart();
 
      const addToCart = () => {
-          cart.addItem(product);
+          cart.addItem(product,selectedColor,selectedSize);
      };
 
      const buyNow = () => {
           cart.addItem(product);
           setCartOpen(true) // open cart for checkout
      };
+     const [selectedColor ,setSelectedColor] = useState(null)
+     const [selectedSize,setSelectedSize] = useState(null)
 
      return (
           <div>
+               {loading && <Loading/>}
                <CartModal
                     isOpen={isCartOpen}
                     onClose={() => setCartOpen(false)}
@@ -85,27 +88,17 @@ const ProductDetail = () => {
                <div className="flex items-center pt-20 justify-center min-h-screen bg-gray-50">
                     <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row gap-10 w-[90%] md:w-[900px]">
                          {/* Left: Product Images */}
-                         <div className="flex flex-col items-center md:w-1/2">
+                         <div className="displayimg flex flex-col items-center md:w-1/2">
                               <img
                                    src={product.imageURL}
                                    alt="Product"
-                                   className="rounded-xl w-80 h-80 object-cover"
+                                   className="rounded-xl bg-blue-gray-50 w-80 h-96 object-contain"
                               />
                               <div className="flex gap-3 mt-4">
                                    <img
-                                        src="https://via.placeholder.com/80"
+                                        src="https://placehold.co/600x400/blue/white"
                                         alt="thumb1"
-                                        className="w-16 h-16 rounded-lg cursor-pointer border border-gray-200 hover:border-green-500"
-                                   />
-                                   <img
-                                        src="https://via.placeholder.com/80"
-                                        alt="thumb2"
-                                        className="w-16 h-16 rounded-lg cursor-pointer border border-gray-200 hover:border-green-500"
-                                   />
-                                   <img
-                                        src="https://via.placeholder.com/80"
-                                        alt="thumb3"
-                                        className="w-16 h-16 rounded-lg cursor-pointer border border-gray-200 hover:border-green-500"
+                                        className="w-16 h-16 rounded-lg cursor-pointer border border-gray-200 hover:border-secondary-500"
                                    />
                               </div>
                          </div>
@@ -113,13 +106,10 @@ const ProductDetail = () => {
                          {/* Right: Product Details */}
                          <div className="flex flex-col justify-between md:w-1/2">
                               <div>
-                                   <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+                                   <h2 className="text-2xl font-title font-semibold text-primary-600 mb-2">
                                         {product.name}
                                    </h2>
-                                   <p className="text-sm text-gray-500 mb-2">
-                                        category
-                                   </p>
-
+                                   
                                    <div className="flex items-center gap-2 mb-3">
                                         <Rating
                                              unratedColor="amber"
@@ -134,46 +124,44 @@ const ProductDetail = () => {
                                    <div className="flex items-center gap-3 mb-4">
                                         {product.isOffer ? (
                                              <>
-                                                  <span className="text-2xl font-semibold text-green-600">
+                                                  <span className="text-2xl font-semibold text-secondary-600">
                                                        {product.offer_price}
                                                   </span>
-                                                  <span className="text-gray-400 line-through">
+                                                  <span className="text-secondary-400 line-through">
                                                        {product.price}
                                                   </span>
-                                                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                                                  <span className="text-xs bg-secondary-100 text-secondary-700 px-2 py-1 rounded-full">
                                                        20% OFF
                                                   </span>
                                              </>
                                         ) : (
-                                             <span className="text-2xl font-semibold text-green-600">
+                                             <span className="text-2xl font-semibold text-secondary-600">
                                                   {product.price}
                                              </span>
                                         )}
                                    </div>
 
-                                   <p className="text-gray-600 mb-5">
+                                   <p className="text-gray-600 font-subtitle mb-5">
                                         {product.description}
                                    </p>
 
                                    {/* Sizes */}
                                    <div className="mb-4">
-                                        <h3 className="font-semibold text-gray-800 mb-2">
-                                             Size
+                                        <h3 className="font-semibold font-subtitle text-gray-800 mb-2">
+                                             المقاس
                                         </h3>
-                                        <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+                                        <div className="flex gap-3">
                                              {product.sizes.map((size) => (
                                                   <button
                                                        key={size}
                                                        type="button"
                                                        onClick={() =>
-                                                            toggleSize(size)
+                                                            setSelectedSize(size)
                                                        }
-                                                       className={`py-3 px-4 rounded-xl font-bold text-lg transition-all ${
-                                                            product.sizes.includes(
-                                                                 size
-                                                            )
-                                                                 ? "bg-gray-900 text-white scale-95"
-                                                                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                                       className={`py-3 flex-1 max-w-fit px-4 rounded-xl font-bold text-lg transition-all ${
+                                                            selectedSize == size
+                                                                 ? "bg-primary-300 text-white scale-95"
+                                                                 : "bg-primary-100 text-gray-700 hover:bg-gray-200"
                                                        }`}
                                                   >
                                                        {size}
@@ -184,41 +172,23 @@ const ProductDetail = () => {
 
                                    {/* Colors */}
                                    <div className="mb-4">
-                                        <h3 className="font-semibold text-gray-800 mb-2">
-                                             Color
+                                        <h3 className="font-semibold font-subtitle text-gray-800 mb-2">
+                                             اللون
                                         </h3>
                                         <div className="flex gap-3">
-                                             <button
-                                                  className="w-8 h-8 rounded-full border-2 border-green-500"
-                                                  style={{
-                                                       backgroundColor:
-                                                            "#0f5132",
-                                                  }}
-                                             ></button>
-                                             <button
-                                                  className="w-8 h-8 rounded-full border border-gray-300"
-                                                  style={{
-                                                       backgroundColor:
-                                                            "#3d9970",
-                                                  }}
-                                             ></button>
-                                             <button
-                                                  className="w-8 h-8 rounded-full border border-gray-300"
-                                                  style={{
-                                                       backgroundColor:
-                                                            "#a1d67d",
-                                                  }}
-                                             ></button>
+                                             {product.colors.map(({name,hex})=>{
+                                                   return <button onClick={()=>setSelectedColor({name,hex})} className={`w-10 h-10 border-4 transition-colors duration-200 rounded-full ${selectedColor?.name==name ? "border-blue-700":""}`} key={name} style={{backgroundColor:hex}}></button>
+                                             })}
                                         </div>
                                    </div>
                               </div>
 
                               {/* Buttons */}
                               <div className="flex gap-4 mt-5">
-                                   <button onClick={addToCart} className="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
+                                   <button onClick={addToCart} className="flex-1 bg-primary-600 text-white py-3 rounded-lg hover:bg-primary-700">
                                         Add to Cart
                                    </button>
-                                   <button  className="flex-1 border border-green-600 text-green-600 py-3 rounded-lg hover:bg-green-50">
+                                   <button  className="flex-1 border border-primary-600 text-primary-600 py-3 rounded-lg hover:bg-green-50">
                                         Buy Now
                                    </button>
                               </div>

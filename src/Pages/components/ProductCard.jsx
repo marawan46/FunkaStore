@@ -69,18 +69,10 @@ export default function ProductCard({ product, onOpenCart = () => {} }) {
 
     <div className="mt-3 flex gap-2">
       <button
-        onClick={buyNow}
         disabled={!product.available}
-        className="flex-1 px-2 py-1.5 bg-black text-white text-sm rounded-md hover:bg-gray-800 transition"
+        className="flex-1 px-2 py-1.5 font-subtitle bg-pink-300 text-white text-sm rounded-md hover:bg-pink-100 transition"
       >
         اشترِ الآن
-      </button>
-      <button
-        onClick={addToCart}
-        disabled={!product.available}
-        className="flex-1 px-2 py-1.5 border border-gray-300 text-sm rounded-md hover:bg-gray-100 transition"
-      >
-        أضف للعربة
       </button>
     </div>
   </div>

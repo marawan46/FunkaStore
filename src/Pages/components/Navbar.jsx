@@ -30,7 +30,7 @@ export default function Navbar({ onOpenCart = () => {} }) {
                <div className="max-w-6xl mx-auto px-4 py-4 font-title  rounded-full shadow-lg border border-gray-200 bg-gray-100/10 filter backdrop-blur-md w-[85%] flex items-center justify-between">
 
                          <div className="text-xl font-extrabold font-title w-10 hover:scale-125 transition-transform duration-200 rounded-full p-2 bg-pink-100">
-                                        <img src="bow.svg" className=""/>
+                                        <img src="/bow.svg" className=""/>
                          </div>
 
                          <nav className="hidden md:flex gap-12 text-pink-200">

@@ -94,7 +94,7 @@ export default function CartModal({ isOpen, onClose }) {
                 >
                   {/* Image */}
                   <img
-                    src={it.product.imgURL}
+                    src={it.product.imageURL}
                     alt={it.product.name}
                     className="w-20 h-20 rounded-xl object-cover flex-shrink-0"
                   />
