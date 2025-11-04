@@ -41,7 +41,7 @@ export function Signin() {
           تسجيل دخول 
         </Typography>
         <Typography className="mb-16 text-gray-600 font-normal font-title text-[18px]">
-تسجيل الدخول لادارة صفحة فيونكا ستور
+تسجيل الدخول لادارة صفحة فيونكه ستور
         </Typography>
         <form action="#" className="mx-auto max-w-[24rem] text-left">
           <div className="mb-6">
