@@ -9,7 +9,7 @@ const useFetch = ({
 }) => {
      const [data, setData] = useState([]);
      const [error, setError] = useState(null);
-
+     const [loading, setloading] = useState(true)
      useEffect(() => {
           async function getData() {
                let query = supabase.from(tableName).select(selectStatment);
@@ -21,11 +21,12 @@ const useFetch = ({
                const { data, error } = await query;
                setData(data);
                setError(error);
+               setloading(false)
           }
 
           getData();
      }, [tableName, filter, condition, selectStatment]);
 
-     return [data, error];
+     return [data, error,loading];
 };
 export default useFetch;
